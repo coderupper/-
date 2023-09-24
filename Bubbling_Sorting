@@ -1,0 +1,43 @@
+package com.itheima;
+
+import java.util.Random;
+
+public class Bubbling_sorting {
+    public static void main(String[] args) {
+        //首先创建一个定长数组
+        int[] arr = new int[100000];
+        //随机数函数
+        Random r = new Random();
+
+        //利用随机数给数组赋值，赋值范围在0 - 99
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = r.nextInt(0,100);
+        }
+	
+        //获取系统时间
+        long start = System.currentTimeMillis();
+
+        //这个是比较的次数，也相当于排序完后的数的个数
+        for(int i = 0;i <= arr.length - 1;i++){
+            //因为每次排序后，最大的数都在最后面，所以这个i相当于排序好的大数个数
+            //所以不必再比较已经排序好的数
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                //一次比较右边的元素，大的往后移
+                if(arr[j]>arr[j + 1]){
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+
+        long end = System.currentTimeMillis();
+
+        //获取冒泡排序所需的时间
+        System.out.println(end - start);
+		//打印排序后的数组
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
