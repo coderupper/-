@@ -1,0 +1,37 @@
+package com.itheima;
+
+import java.util.Random;
+
+public class Insert_sorting {
+    public static void main(String[] args) {
+        int[] arr = new int[100000];
+        Random r = new Random();
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = r.nextInt(0,100);
+        }
+
+        long start = System.currentTimeMillis();
+
+        for (int i = 1; i < arr.length; i++) {
+            //要插入的的元素，从第二个元素开始插入，因为默认第一个元素是有序的
+            //每次要插入的元素都是排序完后的最后一个元素的下一个元素
+            int key = arr[i];
+            int j = i - 1;
+            //从最后一个元素开始比较，之后只需从排序之后的元素进行比较就行了
+            while(j >= 0 && arr[j] > key){
+                arr[j + 1] = arr[j];
+                j --;
+            }
+            //这时j是在比key小的那个元素的位置，所以 j + 1
+            arr[j + 1] = key;
+        }
+
+        long end = System.currentTimeMillis();
+
+        System.out.println(end - start);
+
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
